@@ -18,6 +18,7 @@ step_size = 100
 print(".............GRADIENT......DESCENT.....................")
 #x_min = float(input("Input minimal x:"))
 #x_max = float(input("Input max x:"))
+x = 0
 x_max = 3
 x_min = -3
 y_min_global = f(x)
