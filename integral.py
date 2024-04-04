@@ -52,3 +52,27 @@ for i in range(N):
     area_carlo += f(gen) * rectangle_width
     
 print(f'monte_carlo method area = {area_carlo}')
+
+# Homer Simpson method
+
+h = (b-a) / (N * 2)
+
+area_simpson1 = (h / 3) * f(a)
+area_simpson2 = 0 
+area_simpson3 = 0
+area_simpson4 = (h / 3) * f(a)
+
+even = []
+odd = []
+
+for i in range(N):
+    if i % 2 == 0:
+        even.append(i)
+    else:
+        odd.append(i)
+for i in range(len(even)):
+    area_simpson2 += (h / 3) * (2 * (f(even[i] * h)))
+
+for i in range(len(even)):
+    area_simpson3 += (h / 3) * (4 * (f(odd[i] * h)))
+print(f'homer simpson method area = {2 * (area_simpson1 + area_simpson2 + area_simpson3 + area_simpson4)}')
