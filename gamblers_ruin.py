@@ -1,36 +1,80 @@
+import numpy as np
 import random
 
-game_count = int(input('input game count: '))
-turn_number = int(input('input turn count: '))
-coin_defect = float(input('input coin defect parameter: '))
-first_stack_input = int(input('input first stack: '))
-second_stack_input = int(input('input second stack: '))
-first_wins = 0
-second_wins = 0
-turn_count = 0
+#first example function
+def f(x):
+    return np.sin(x)
 
-for _ in range(game_count):
-    first_stack = first_stack_input
-    second_stack = second_stack_input
-    for _ in range(turn_number):
-        randomness = random.random()
-        if randomness > coin_defect:
-            first_stack -= 1
-            second_stack += 1
-            turn_count += 1
-        else:
-            first_stack += 1
-            second_stack -= 1
-            turn_count += 1
+# interval [a,b]
+a = 0
+b = np.pi
 
-        if first_stack == 0 or second_stack == 0:
-            break
-            
-    if first_stack > second_stack:
-        first_wins += 1
+N = int(input("input approximity number: "))
+
+
+#rectangle method
+rectangle_width = (b - a) / N
+
+#right rectangle area method
+
+area_right = 0
+
+for i in range(N):
+    area_right += rectangle_width * f(a + rectangle_width * i)
+print(f'rigth rectangle method area = {area_right}')
+
+#left rectangle area method
+
+area_left = 0
+
+for i in range(1,N):
+    area_left += rectangle_width * f(a + rectangle_width * i - rectangle_width)
+print(f'left rectangle method area = {area_left}')
+
+area_trap = 0
+
+#trapezoid method
+
+j = 1
+for i in range(N):
+    area_trap += rectangle_width * ( (f(a + i * rectangle_width) + f(a + j * rectangle_width)) / 2)
+    j += 1
+print(f'trapezoid method area = {area_trap}')
+
+
+
+#Monte - Carlo
+area_carlo = 0
+
+
+for i in range(N):
+    gen = random.random() * (b - a) + a
+    area_carlo += f(gen) * rectangle_width
+    
+print(f'monte_carlo method area = {area_carlo}')
+
+# Homer Simpson method
+
+h = (b - a) / (N * 2)
+
+area_simpson1 =  (h / 3) * f(a)
+area_simpson2 = 0
+area_simpson3 = 0
+area_simpson4 = (h / 3) * f(b)
+
+even = []
+odd = []
+
+for i in range(N):
+    if i % 2 == 0:
+        even.append(i)
     else:
-        second_wins += 1
-print(f'first won {first_wins} times | second won {second_wins} times')
-print(f'first loss probability is {1 - (first_wins / game_count)}')
-print(f'second loss probability is {1 - (second_wins / game_count)}')
-print(f'turn count {turn_count} , average game length {turn_count / game_count}')
+        odd.append(i)
+
+for i in range(len(even)):
+    area_simpson2 += (h / 3) * (2 * (f(even[i] * h)))
+    
+for i in range(len(odd)):
+    area_simpson3 += (h / 3) * (4 * (f(odd[i] * h)))
+    
+print(f'homer simpson method area = {2 * (area_simpson1 + area_simpson2 + area_simpson3 + area_simpson4)}')
