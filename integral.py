@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 #first example function
 def f(x):
@@ -9,6 +10,7 @@ a = 0
 b = np.pi
 
 N = int(input("input approximity number: "))
+
 
 #rectangle method
 rectangle_width = (b - a) / N
@@ -38,3 +40,15 @@ for i in range(N):
     area_trap += rectangle_width * ( (f(a + i * rectangle_width) + f(a + j * rectangle_width)) / 2)
     j += 1
 print(f'trapezoid method area = {area_trap}')
+
+
+
+#Monte - Carlo
+area_carlo = 0
+
+
+for i in range(N):
+    gen = random.random() * (b - a) + a
+    area_carlo += f(gen) * rectangle_width
+    
+print(f'monte_carlo method area = {area_carlo}')
