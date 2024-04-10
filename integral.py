@@ -54,8 +54,12 @@ for i in range(N):
 print(f'monte_carlo method area = {area_carlo}')
 
 # Homer Simpson method
+# if N is odd, change it to even for this method to work
 
-h = (b-a) / (N * 2)
+if N % 2 == 1:
+    N += 1
+
+h = (b-a) / (N)
 
 area_simpson1 = (h / 3) * f(a)
 area_simpson2 = 0 
@@ -75,4 +79,4 @@ for i in range(len(even)):
 
 for i in range(len(even)):
     area_simpson3 += (h / 3) * (4 * (f(odd[i] * h)))
-print(f'homer simpson method area = {2 * (area_simpson1 + area_simpson2 + area_simpson3 + area_simpson4)}')
+print(f'homer simpson method area = {(area_simpson1 + area_simpson2 + area_simpson3 + area_simpson4)}')
