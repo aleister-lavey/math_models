@@ -29,7 +29,7 @@ area_left = 0
 
 for i in range(1,N):
     area_left += rectangle_width * f(a + rectangle_width * i - rectangle_width)
-print(f'left rectangle method area = {area_left}')
+print(f'left rectangle method area  = {area_left}')
 
 area_trap = 0
 
@@ -39,7 +39,7 @@ j = 1
 for i in range(N):
     area_trap += rectangle_width * ( (f(a + i * rectangle_width) + f(a + j * rectangle_width)) / 2)
     j += 1
-print(f'trapezoid method area = {area_trap}')
+print(f'trapezoid method area       = {area_trap}')
 
 
 
@@ -51,7 +51,7 @@ for i in range(N):
     gen = random.random() * (b - a) + a
     area_carlo += f(gen) * rectangle_width
     
-print(f'monte_carlo method area = {area_carlo}')
+print(f'monte_carlo method area     = {area_carlo}')
 
 # Homer Simpson method
 # if N is odd, change it to even for this method to work
@@ -79,4 +79,4 @@ for i in range(len(even)):
 
 for i in range(len(even)):
     area_simpson3 += (h / 3) * (4 * (f(odd[i] * h)))
-print(f'homer simpson method area = {(area_simpson1 + area_simpson2 + area_simpson3 + area_simpson4)}')
+print(f'homer simpson method area   = {(area_simpson1 + area_simpson2 + area_simpson3 + area_simpson4)}')
