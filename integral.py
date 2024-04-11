@@ -3,14 +3,13 @@ import random
 
 #first example function
 def f(x):
-    return np.sin(x)
+    return (x + np.cos(x)) / (x ** 2 + 2 * np.sin(x))
 
 # interval [a,b]
-a = 0
-b = np.pi
+a = 1
+b = 3 ** 0.5
 
-N = int(input("input approximity number: "))
-
+N = 1000000
 
 #rectangle method
 rectangle_width = (b - a) / N
@@ -41,11 +40,8 @@ for i in range(N):
     j += 1
 print(f'trapezoid method area       = {area_trap}')
 
-
-
 #Monte - Carlo
 area_carlo = 0
-
 
 for i in range(N):
     gen = random.random() * (b - a) + a
@@ -54,29 +50,24 @@ for i in range(N):
 print(f'monte_carlo method area     = {area_carlo}')
 
 # Homer Simpson method
-# if N is odd, change it to even for this method to work
 
-if N % 2 == 1:
-    N += 1
-
-h = (b-a) / (N)
-
-area_simpson1 = (h / 3) * f(a)
-area_simpson2 = 0 
-area_simpson3 = 0
-area_simpson4 = (h / 3) * f(a)
+area_simpson_first = rectangle_width / 3 * f(a)
+area_simpson_even = 0 
+area_simpson_odd = 0
+area_simpson_last = rectangle_width / 3 * f(b)
 
 even = []
 odd = []
 
-for i in range(N):
+for i in range(1 , N):
     if i % 2 == 0:
         even.append(i)
     else:
         odd.append(i)
-for i in range(len(even)):
-    area_simpson2 += (h / 3) * (2 * (f(even[i] * h)))
 
 for i in range(len(even)):
-    area_simpson3 += (h / 3) * (4 * (f(odd[i] * h)))
-print(f'homer simpson method area   = {(area_simpson1 + area_simpson2 + area_simpson3 + area_simpson4)}')
+    area_simpson_even += 2 / 3 * rectangle_width * f(even[i] * rectangle_width + a)
+
+for i in range(len(odd)):
+    area_simpson_odd += 4 / 3 * rectangle_width * f(odd[i] * rectangle_width + a)
+print(f'homer simpson method area   = {(area_simpson_first + area_simpson_even + area_simpson_odd + area_simpson_last)}')
