@@ -6,12 +6,15 @@ def f(x):
 
 true_area = (np.e) ** (np.pi / 2) / 2 - 0.5
 
+N = int(random.uniform(1,10000))
+print(N)
+
 print(f'original integral value     =          {true_area}\n')
 
 # interval [a,b]
 a = 0
 b = np.pi / 2
-N = 1000
+
 errors = []
 rectangle_width = (b - a) / N
 
