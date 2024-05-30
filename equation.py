@@ -13,6 +13,7 @@ x_left = a
 x_right = b
 eps = 0.0001
 
+# метод бисекции
 while x_left - x_right > eps:
     cent = (x_right - x_left) / 2
     x_i = x_left + cent
@@ -21,6 +22,7 @@ while x_left - x_right > eps:
     else:
         x_left = x_i
 print(f'x_i ={x_i}')
+# конец метода бисекции
 
 x_plt = np.arange(a, b, 0.001)
 f_plt = [f(x) for x in x_plt]
